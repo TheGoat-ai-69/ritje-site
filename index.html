@@ -182,6 +182,7 @@ p { margin: 0; text-wrap: pretty; }
 .route .plek:focus-visible { outline: 2px solid var(--paars-tekst); outline-offset: 0; }
 /* Suggesties onder de adressen, in het kaartje zelf (zoals in de app) */
 .suggesties { list-style: none; margin: calc(-1 * var(--r2)) 0 0; padding: 0; display: grid; gap: 2px; }
+.suggesties[hidden] { display: none; } /* anders neemt de lege lijst toch ruimte in het kaartje */
 .suggesties li { display: flex; justify-content: space-between; align-items: baseline; gap: .5rem; padding: .5rem .625rem; border-radius: 10px; background: var(--vlak); font-size: .9375rem; cursor: pointer; }
 .suggesties li:hover, .suggesties li[aria-selected="true"] { background: #E6DDF8; }
 .suggesties small { flex: none; color: var(--inkt-zacht); font-size: var(--t-klein); }
@@ -216,10 +217,9 @@ p { margin: 0; text-wrap: pretty; }
 
 /* Het bericht dat de meerijder krijgt */
 .verstuurd {
-  position: relative; width: min(19.5rem, 88%); margin: calc(-1 * var(--r1)) calc(-1 * var(--r2)) 0 auto;
+  position: relative; width: min(19.5rem, 88%); margin: var(--r2) 0 0 auto;
   background: var(--wa-grond); border-radius: 20px; padding: .625rem .625rem .75rem; box-shadow: var(--schaduw-klein);
 }
-@media (max-width: 30rem) { .verstuurd { margin-right: 0; } }
 .verstuurd .naar { display: flex; align-items: center; gap: .4rem; padding: .125rem .375rem .5rem; font-size: var(--t-klein); color: var(--wa-tijd); }
 .verstuurd .naar svg { width: .875rem; height: .875rem; color: #25D366; }
 .wa {
@@ -307,8 +307,14 @@ details p { color: var(--inkt-zacht); max-width: 38rem; padding-bottom: 1.25rem;
 .slot h2 { color: #FFFFFF; max-width: 18ch; }
 .slot .zacht { color: #C9C0DA; }
 .slot :focus-visible { outline-color: #FFFFFF; }
-.slot-r { position: absolute; right: clamp(1.5rem, 1rem + 2vw, 3rem); bottom: clamp(1.5rem, 1rem + 2vw, 3rem); width: 6.5rem; height: auto; opacity: .3; pointer-events: none; }
+.slot-r { position: absolute; right: clamp(1.5rem, 1rem + 2vw, 3rem); bottom: clamp(1.5rem, 1rem + 2vw, 3rem); width: 6.5rem; height: auto; opacity: .85; pointer-events: none; }
 @media (max-width: 40rem) { .slot-r { width: 3.5rem; } }
+/* Op de telefoon staat alles onder elkaar; dan is minder ruimte tussen de blokken en de kopjes prettiger. */
+@media (max-width: 40rem) {
+  :root { --blok: 3.5rem; }
+  .blok > .kolom, .stappen-wrap, .voordelen, .stappen { gap: var(--r4); }
+  .held { gap: var(--r4); }
+}
 .slot-boven, .slot-onder { display: grid; gap: var(--r3); position: relative; }
 .slot-onder { padding-top: var(--r6); border-top: 1px solid rgba(243, 239, 250, .14); }
 .winkels { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; }
