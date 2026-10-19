@@ -110,6 +110,8 @@ h2 { font-size: var(--t-h2); line-height: 1.05; font-weight: 800; letter-spacing
 h3 { font-size: var(--t-groot); line-height: 1.25; font-weight: 700; letter-spacing: -.01em; }
 p { margin: 0; text-wrap: pretty; }
 .zacht { color: var(--inkt-zacht); }
+.via { background: var(--vlak); color: var(--inkt); border: 1px solid var(--paars); border-radius: var(--r2); padding: var(--r2) var(--r3); font-size: var(--t-basis, 1rem); line-height: 1.5; max-width: 34rem; }
+.via a { color: var(--paars); font-weight: 700; }
 .verborgen { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 :focus-visible { outline: 3px solid var(--paars-tekst); outline-offset: 3px; border-radius: 6px; }
 .blok { padding-block: var(--blok); }
@@ -397,6 +399,8 @@ footer a { color: inherit; text-underline-offset: 3px; }
   <!-- 1. Wat is dit? Het hele product in één beeld. -->
   <div class="kolom held">
     <div class="held-tekst">
+      <!-- Alleen voor wie via de link in een betaalverzoek komt (ritje-app.nl/v); het script zet hem aan. -->
+      <p class="via" id="via-verzoek" hidden>Je kreeg een betaalverzoek dat met Ritje is uitgerekend: kenteken, route en brandstofprijs, geen natte vinger. <a href="#probeer">Reken zelf een rit uit</a></p>
       <h1 class="slogan"><span class="boven">Jij rijdt,</span><span class="onder">Ritje rekent.</span></h1>
       <p class="inleiding">Ritje rekent uit wat je autorit echt kost en stuurt je meerijders één betaalverzoek via WhatsApp.</p>
       <a class="knop" href="#probeer">Probeer Ritje</a>
@@ -600,6 +604,28 @@ Thijs</span><span class="tijd">18:42 <svg viewBox="0 0 16 11" aria-label="Geleze
 
 <script>
 (function () {
+  // Kwam de bezoeker via de link onderaan een betaalverzoek (ritje-app.nl/v)? Dan de regel daarover
+  // tonen, en dat anoniem meetellen: geen cookies, geen naam, alleen "iemand kwam via een verzoek".
+  var VIA = /^\/v\/?$/.test(location.pathname) ? 'verzoek' : 'direct';
+  if (VIA === 'verzoek') document.getElementById('via-verzoek').hidden = false;
+  var POSTHOG_SLEUTEL = 'phc_qBmagNd7AgKeXEyweng2FRVXtGZnNd8vrUUenYiTR7Vx'; // wordt bij het bouwen van de site ingevuld
+  function tel(gebeurtenis, eigenschappen) {
+    if (!POSTHOG_SLEUTEL || POSTHOG_SLEUTEL.indexOf('__') === 0) return;
+    var nummer = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : String(Math.random());
+    var echt = /(^|\.)ritje-app\.nl$|^ritje\.expo\.app$/.test(location.hostname);
+    eigenschappen = eigenschappen || {};
+    eigenschappen.$process_person_profile = false;
+    eigenschappen.$lib = 'ritje-site';
+    eigenschappen.omgeving = echt ? 'echt' : 'ontwikkel';
+    try {
+      fetch('https://eu.i.posthog.com/i/v0/e/', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, keepalive: true,
+        body: JSON.stringify({ api_key: POSTHOG_SLEUTEL, event: gebeurtenis, distinct_id: nummer, properties: eigenschappen })
+      }).catch(function () {});
+    } catch (e) {}
+  }
+  tel('site bezocht', { via: VIA });
+
   // Bovenbalk: randje zodra de bovenkant van de pagina uit beeld is (zonder bij elke scrollstap te rekenen).
   var balk = document.getElementById('balk');
   var top = document.getElementById('top');
@@ -754,7 +780,7 @@ Thijs</span><span class="tijd">18:42 <svg viewBox="0 0 16 11" aria-label="Geleze
     if (!punt.van || !punt.naar) return;
     var nr = ++routeNr;
     rekenstand.textContent = 'Ritje rekent…';
-    fetch(SERVER + '/rekenproef', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ van: punt.van, naar: punt.naar }) })
+    fetch(SERVER + '/rekenproef', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ van: punt.van, naar: punt.naar, via: VIA }) })
       .then(function (r) { return r.json().then(function (data) { if (!r.ok) throw new Error(data.fout); return data; }); })
       .then(function (data) {
         if (nr !== routeNr) return;
