@@ -161,6 +161,7 @@ p { margin: 0; text-wrap: pretty; }
 
 /* De voorbeeldrit */
 .voorbeeld { position: relative; width: 100%; max-width: 25.5rem; justify-self: center; padding-bottom: var(--r2); }
+#voorbeeld { scroll-margin-top: 5.5rem; } /* de knop "Reken een rit uit" springt hierheen; ruimte voor de vaste balk bovenaan */
 .rit { background: var(--kaart); border-radius: 28px; box-shadow: var(--schaduw); overflow: hidden; }
 .rit-binnen { padding: var(--r3); display: grid; gap: var(--r3); }
 .rit-kop { display: flex; justify-content: space-between; align-items: center; gap: var(--r2); }
@@ -391,7 +392,7 @@ footer a { color: inherit; text-underline-offset: 3px; }
       <svg viewBox="0 0 100 100" aria-hidden="true"><defs><clipPath id="logo-b"><rect width="100" height="50"/></clipPath><clipPath id="logo-o"><rect y="54" width="100" height="46"/></clipPath><linearGradient id="logo-g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#16101F"/><stop offset="1" stop-color="#000"/></linearGradient></defs><rect width="100" height="100" fill="url(#logo-g)"/><g transform="translate(-4 0)" clip-path="url(#logo-b)"><path d="M34 26 V74 M34 26 H54 A13 13 0 0 1 54 52 H34 M50 52 L68 74" stroke="#9B6BFF" stroke-width="13" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g><g transform="translate(5 0)" clip-path="url(#logo-o)"><path d="M34 26 V74 M34 26 H54 A13 13 0 0 1 54 52 H34 M50 52 L68 74" stroke="#FFFFFF" stroke-width="13" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></svg>
       Ritje
     </a>
-    <a class="knop klein" href="#probeer">Probeer Ritje</a>
+    <a class="knop klein" href="#voorbeeld">Reken een rit uit</a>
   </header>
 </div>
 
@@ -400,10 +401,10 @@ footer a { color: inherit; text-underline-offset: 3px; }
   <div class="kolom held">
     <div class="held-tekst">
       <!-- Alleen voor wie via de link in een betaalverzoek komt (ritje-app.nl/v); het script zet hem aan. -->
-      <p class="via" id="via-verzoek" hidden>Je kreeg een betaalverzoek dat met Ritje is uitgerekend: kenteken, route en brandstofprijs, geen natte vinger. <a href="#probeer">Reken zelf een rit uit</a></p>
+      <p class="via" id="via-verzoek" hidden>Je kreeg een betaalverzoek dat met Ritje is uitgerekend: kenteken, route en brandstofprijs, geen natte vinger. <a href="#voorbeeld">Reken zelf een rit uit</a></p>
       <h1 class="slogan"><span class="boven">Jij rijdt,</span><span class="onder">Ritje rekent.</span></h1>
       <p class="inleiding">Ritje rekent uit wat je autorit echt kost en stuurt je meerijders één betaalverzoek via WhatsApp.</p>
-      <a class="knop" href="#probeer">Probeer Ritje</a>
+      <a class="knop" href="#voorbeeld">Reken een rit uit</a>
       <ul class="feiten" aria-label="In het kort">
         <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Gratis</li>
         <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>iPhone en Android</li>
@@ -411,7 +412,7 @@ footer a { color: inherit; text-underline-offset: 3px; }
       </ul>
     </div>
 
-    <div class="voorbeeld">
+    <div class="voorbeeld" id="voorbeeld">
       <section class="rit" aria-label="Voorbeeld van een rit in Ritje">
         <div class="rit-binnen">
           <div class="rit-kop">
@@ -504,7 +505,7 @@ Thijs</span><span class="tijd">18:42 <svg viewBox="0 0 16 11" aria-label="Geleze
       <div class="stappen-tekst">
       <div class="kop"><h2 id="kop-stappen">In drie stappen geregeld</h2></div>
       <ol class="stappen">
-        <li><h3>Vul één keer je kenteken in</h3><p>Ritje zoekt het verbruik van jouw auto op bij de RDW en onthoudt het. Daarna kies je alleen nog waar je heen rijdt. De afstand rekent Ritje zelf uit.</p></li>
+        <li><h3>Zeg waar je heen rijdt</h3><p>De afstand rekent Ritje zelf uit. Je kenteken vul je één keer in: Ritje zoekt het verbruik van jouw auto op bij de RDW en onthoudt het.</p></li>
         <li><h3>Zie wat ieder betaalt</h3><p>Brandstof, tol en parkeren, gedeeld door iedereen in de auto. Jij betaalt ook mee.</p></li>
         <li><h3>Spaar op en vraag in één keer</h3><p>Elke rit komt op de rekening van je meerijder. Na een week of een maand stuur je één bericht voor alle ritten samen.</p></li>
       </ol>
@@ -525,7 +526,8 @@ Thijs</span><span class="tijd">18:42 <svg viewBox="0 0 16 11" aria-label="Geleze
   </section>
 
   <!-- 5. Wat vinden anderen? Nog niets verzonnen: de echte reviews komen hier na de lancering. -->
-  <section class="blok" aria-labelledby="kop-reviews">
+  <!-- Verborgen tot er echte reviews zijn (geen lege kaders of verzonnen reviews op de site): "hidden" weghalen en de drie plekken vullen. -->
+  <section class="blok" aria-labelledby="kop-reviews" hidden>
     <div class="kolom">
       <div class="kop">
         <h2 id="kop-reviews">Wat meerijders ervan vinden</h2>
@@ -549,7 +551,7 @@ Thijs</span><span class="tijd">18:42 <svg viewBox="0 0 16 11" aria-label="Geleze
         <details><summary>…het bedrag niet precies klopt?<span class="plus" aria-hidden="true"></span></summary><p>Het is een schatting op basis van het officiële verbruik van je auto, met een correctie voor echt rijden, en de gemiddelde brandstofprijs van die week. Je kunt de prijs zelf aanpassen.</p></details>
         <details><summary>…ik er dan geld aan verdien?<span class="plus" aria-hidden="true"></span></summary><p>Nee. Ritje deelt alleen wat de rit echt kost. Iedereen betaalt zijn deel, de bestuurder ook. Zo blijft het samen rijden en geen taxi.</p></details>
         <details><summary>…ik mijn gegevens niet wil delen?<span class="plus" aria-hidden="true"></span></summary><p>Hoeft ook niet. Je ritten, meerijders en IBAN staan alleen op je eigen telefoon. Voor de afstand en de tol gaan alleen punten van de route naar onze server, zonder je naam, en die bewaren we niet. Deze website gebruikt geen cookies en houdt niet bij wie er kijkt.</p></details>
-        <details><summary>…ik een elektrische auto heb?<span class="plus" aria-hidden="true"></span></summary><p>Die werkt nog niet. We zijn ermee bezig.</p></details>
+        <details><summary>…ik een elektrische auto heb?<span class="plus" aria-hidden="true"></span></summary><p>Die werkt ook. Ritje rekent dan met het stroomverbruik van je auto en wat laden kost, thuis of bij een laadpaal.</p></details>
       </div>
     </div>
   </section>
