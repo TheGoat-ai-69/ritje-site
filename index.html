@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Ritje: jij rijdt, Ritje rekent</title>
-<meta name="description" content="Ritje rekent uit wat je autorit echt kost en stuurt je meerijders één betaalverzoek via WhatsApp. Gratis, zonder account.">
+<meta name="description" content="Ritje rekent uit wat je autorit kost en zet één betaalverzoek voor je meerijders klaar voor WhatsApp. Gratis, zonder account.">
 <!-- Deelplaatje (og-ritje.png, gemaakt door scripts/maak-deelplaatje.py). De site woont op ritje-app.nl (GitHub Pages);
      dezelfde pagina staat ook op ritje.expo.app, waar de server met de rekenproef draait. -->
 <meta property="og:title" content="Ritje: jij rijdt, Ritje rekent">
-<meta property="og:description" content="Rekent uit wat je autorit kost en stuurt je meerijders één betaalverzoek via WhatsApp. Gratis, zonder account.">
+<meta property="og:description" content="Rekent uit wat je autorit kost en zet één betaalverzoek voor je meerijders klaar voor WhatsApp. Gratis, zonder account.">
 <meta property="og:image" content="https://ritje-app.nl/og-ritje.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -401,9 +401,9 @@ footer a { color: inherit; text-underline-offset: 3px; }
   <div class="kolom held">
     <div class="held-tekst">
       <!-- Alleen voor wie via de link in een betaalverzoek komt (ritje-app.nl/v); het script zet hem aan. -->
-      <p class="via" id="via-verzoek" hidden>Je kreeg een betaalverzoek dat met Ritje is uitgerekend: kenteken, route en brandstofprijs, geen natte vinger. <a href="#voorbeeld">Reken zelf een rit uit</a></p>
+      <p class="via" id="via-verzoek" hidden>Dit betaalverzoek is uitgerekend met Ritje, met het verbruik van de auto en de pompprijs van het CBS. <a href="#voorbeeld">Reken zelf een rit uit</a></p>
       <h1 class="slogan"><span class="boven">Jij rijdt,</span><span class="onder">Ritje rekent.</span></h1>
-      <p class="inleiding">Ritje rekent uit wat je autorit echt kost en stuurt je meerijders één betaalverzoek via WhatsApp.</p>
+      <p class="inleiding">Ritje rekent uit wat je autorit kost en zet één betaalverzoek voor je meerijders klaar voor WhatsApp.</p>
       <a class="knop" href="#voorbeeld">Reken een rit uit</a>
       <ul class="feiten" aria-label="In het kort">
         <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Gratis</li>
@@ -454,17 +454,19 @@ footer a { color: inherit; text-underline-offset: 3px; }
       <div class="verstuurd" aria-label="Voorbeeld van het WhatsApp-bericht dat je meerijder krijgt">
         <span class="naar"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>Naar Sanne</span>
         <p class="typt" aria-hidden="true"><span></span><span></span><span></span></p>
-        <p class="wa bericht"><span id="bericht">Hoi Sanne! Dit zijn je ritten:
+        <p class="wa bericht"><span id="bericht">Hoi Sanne,
+Dit zijn je ritten:
 
-• 10 okt 2026 · Heen: € 9,19
-• 12 okt 2026 · Terug: € 8,19
+• 10 okt · Heen: € 9,19
+• 12 okt · Terug: € 8,19
 
 Totaal: € 17,38
 
-Wil je dat overmaken? Dankjewel!
+Maak je het over? Dank je!
 
-IBAN: NL91 ABNA 0417 1643 00
-Thijs</span><span class="tijd">18:42 <svg viewBox="0 0 16 11" aria-label="Gelezen"><path d="M1 6l3 3 6-7M6 9l1 1 7-8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></p>
+IBAN: NL91 ABNA 0417 1643 00 t.n.v. Thijs
+
+Uitgerekend met Ritje: ritje-app.nl/v</span><span class="tijd">18:42 <svg viewBox="0 0 16 11" aria-label="Gelezen"><path d="M1 6l3 3 6-7M6 9l1 1 7-8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></p>
       </div>
     </div>
   </div>
@@ -474,11 +476,7 @@ Thijs</span><span class="tijd">18:42 <svg viewBox="0 0 16 11" aria-label="Geleze
     <div class="kolom twee">
       <div class="kop">
         <h2 id="kop-herken">Samen rijden is leuk. Achteraf om geld vragen niet.</h2>
-        <ul class="lijst">
-          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>Je rekent op je telefoon met een benzineprijs die je half gokt.</li>
-          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>Na drie weekenden weet niemand meer wie wat heeft betaald.</li>
-          <li><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>Je vraagt het liever niet, dus je betaalt het zelf maar.</li>
-        </ul>
+        <p class="zacht">Na een paar weekenden weet niemand meer wie wat heeft betaald, en vragen doe je liever niet.</p>
       </div>
       <div class="groep" aria-label="Voorbeeld van een groepsapp">
         <div class="groep-naam"><span class="rondje" aria-hidden="true">🚗</span><span>Weekend Amsterdam<small>Daan, Sanne, Noor, jij</small></span></div>
@@ -516,11 +514,11 @@ Thijs</span><span class="tijd">18:42 <svg viewBox="0 0 16 11" aria-label="Geleze
   <!-- 4. Wat heb ik eraan? -->
   <section class="blok" aria-labelledby="kop-waarom">
     <div class="kolom">
-      <div class="kop"><h2 id="kop-waarom">Eerlijk delen zonder gedoe</h2></div>
+      <div class="kop"><h2 id="kop-waarom">Eerlijk delen</h2></div>
       <div class="voordelen">
-        <div class="voordeel"><span class="bron">RDW + CBS</span><h3>Een eerlijk bedrag</h3><p>Ritje gebruikt het verbruik van jouw auto bij de RDW en de gemiddelde brandstofprijs van het CBS. Geen gokwerk meer.</p></div>
-        <div class="voordeel"><span class="bron">Per meerijder</span><h3>Nooit meer bijhouden</h3><p>Elke rit wordt per meerijder opgespaard. Je ziet in één oogopslag wie nog wat moet betalen.</p></div>
-        <div class="voordeel"><span class="bron">Op je eigen telefoon</span><h3>Geen account, geen gezeik</h3><p>Downloaden en meteen beginnen. Je ritten, meerijders en IBAN blijven op je eigen telefoon.</p></div>
+        <div class="voordeel"><h3>Een eerlijk bedrag</h3><p>Ritje rekent met het verbruik van jouw auto bij de RDW en de gemiddelde pompprijs van het CBS.</p></div>
+        <div class="voordeel"><h3>Ritje houdt het bij</h3><p>Elke rit komt op de rekening van je meerijder. Je ziet wie nog wat moet betalen.</p></div>
+        <div class="voordeel"><h3>Zonder account</h3><p>Downloaden en beginnen. Je ritten, meerijders en IBAN blijven op je telefoon.</p></div>
       </div>
     </div>
   </section>
@@ -541,17 +539,17 @@ Thijs</span><span class="tijd">18:42 <svg viewBox="0 0 16 11" aria-label="Geleze
     </div>
   </section>
 
-  <!-- 6. Maar wat als...? -->
+  <!-- 6. Vragen -->
   <section class="blok" aria-labelledby="kop-twijfels" style="padding-top: 0">
     <div class="kolom">
-      <div class="kop"><h2 id="kop-twijfels">Maar wat als…</h2></div>
+      <div class="kop"><h2 id="kop-twijfels">Vragen</h2></div>
       <div class="vragen">
-        <details><summary>…het geld kost?<span class="plus" aria-hidden="true"></span></summary><p>Ritje is gratis. Kosten uitrekenen, ritten opsparen en betaalverzoeken sturen kost je niets, en er staat geen reclame in.</p></details>
-        <details><summary>…mijn meerijders de app niet hebben?<span class="plus" aria-hidden="true"></span></summary><p>Dat hoeft niet. Zij krijgen gewoon een bericht via WhatsApp of Berichten, met het bedrag en je IBAN.</p></details>
-        <details><summary>…het bedrag niet precies klopt?<span class="plus" aria-hidden="true"></span></summary><p>Het is een schatting op basis van het officiële verbruik van je auto, met een correctie voor echt rijden, en de gemiddelde brandstofprijs van die week. Je kunt de prijs zelf aanpassen.</p></details>
-        <details><summary>…ik er dan geld aan verdien?<span class="plus" aria-hidden="true"></span></summary><p>Nee. Ritje deelt alleen wat de rit echt kost. Iedereen betaalt zijn deel, de bestuurder ook. Zo blijft het samen rijden en geen taxi.</p></details>
-        <details><summary>…ik mijn gegevens niet wil delen?<span class="plus" aria-hidden="true"></span></summary><p>Hoeft ook niet. Je ritten, meerijders en IBAN staan alleen op je eigen telefoon. Voor de afstand en de tol gaan alleen punten van de route naar onze server, zonder je naam, en die bewaren we niet. Deze website gebruikt geen cookies en houdt niet bij wie er kijkt.</p></details>
-        <details><summary>…ik een elektrische auto heb?<span class="plus" aria-hidden="true"></span></summary><p>Die werkt ook. Ritje rekent dan met het stroomverbruik van je auto en wat laden kost, thuis of bij een laadpaal.</p></details>
+        <details><summary>Kost het geld?<span class="plus" aria-hidden="true"></span></summary><p>Ritje is gratis. Kosten uitrekenen, ritten opsparen en betaalverzoeken sturen kost je niets, en er staat geen reclame in.</p></details>
+        <details><summary>Moeten mijn meerijders de app hebben?<span class="plus" aria-hidden="true"></span></summary><p>Nee. Zij krijgen gewoon een bericht via WhatsApp of Berichten, met het bedrag en je IBAN.</p></details>
+        <details><summary>Klopt het bedrag precies?<span class="plus" aria-hidden="true"></span></summary><p>Het is een schatting op basis van het officiële verbruik van je auto, met een correctie voor echt rijden, en de gemiddelde pompprijs van het CBS. De prijs kun je zelf aanpassen.</p></details>
+        <details><summary>Verdien ik hieraan?<span class="plus" aria-hidden="true"></span></summary><p>Nee. Ritje deelt alleen wat de rit echt kost. Iedereen betaalt zijn deel, de bestuurder ook. Zo blijft het samen rijden en geen taxi.</p></details>
+        <details><summary>Wat gebeurt er met mijn gegevens?<span class="plus" aria-hidden="true"></span></summary><p>Je ritten, meerijders en IBAN staan alleen op je eigen telefoon. Voor de afstand en de tol gaan alleen punten van de route naar onze server, zonder je naam, en die bewaren we niet. De app telt anoniem hoe vaak hij gebruikt wordt, zonder naam, adres of route; dat zet je uit bij Instellingen. Deze website gebruikt geen cookies en houdt niet bij wie er kijkt.</p></details>
+        <details><summary>Werkt het met een elektrische auto?<span class="plus" aria-hidden="true"></span></summary><p>Ja. Ritje rekent dan met het stroomverbruik van je auto en wat laden kost, thuis of bij een laadpaal.</p></details>
       </div>
     </div>
   </section>
@@ -579,13 +577,13 @@ Thijs</span><span class="tijd">18:42 <svg viewBox="0 0 16 11" aria-label="Geleze
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16v12H4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M4 7l8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
             Geef me een seintje bij de lancering
           </a>
-          <p class="zacht">Je stuurt ons een mailtje. Wij schrijven je terug zodra Ritje er is, en verder niets.</p>
+          <p class="zacht">Je stuurt ons een mailtje. Zodra Ritje er is, schrijven we je terug.</p>
         </div>
       </div>
       <div class="slot-onder">
-        <p class="zacht" style="font-size: var(--t-groot); max-width: 30rem">Rijd je vaak met dezelfde mensen? Stuur Ritje alvast door.</p>
+        <p class="zacht" style="font-size: var(--t-groot); max-width: 30rem">Stuur Ritje door aan de mensen met wie je vaak rijdt.</p>
         <div class="delen">
-          <a class="knop wit" id="deel-wa" href="https://wa.me/?text=Ken%20je%20Ritje%3F%20Rekent%20uit%20wat%20een%20autorit%20kost%20en%20stuurt%20iedereen%20%C3%A9%C3%A9n%20betaalverzoek.%20https%3A%2F%2Fritje-app.nl" target="_blank" rel="noopener">
+          <a class="knop wit" id="deel-wa" href="https://wa.me/?text=Ken%20je%20Ritje%3F%20Rekent%20uit%20wat%20een%20autorit%20kost%20en%20zet%20%C3%A9%C3%A9n%20betaalverzoek%20klaar%20voor%20je%20meerijders.%20https%3A%2F%2Fritje-app.nl" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#25D366" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
             Stuur door via WhatsApp
           </a>
@@ -696,9 +694,9 @@ Thijs</span><span class="tijd">18:42 <svg viewBox="0 0 16 11" aria-label="Geleze
     document.getElementById('personen').textContent = personen;
     telNaar(document.getElementById('per-persoon'), heen);
     document.getElementById('bericht').textContent =
-      'Hoi Sanne! Dit zijn je ritten:\n\n• 10 okt 2026 · Heen: ' + euro(heen) +
-      '\n• 12 okt 2026 · Terug: ' + euro(terug) + '\n\nTotaal: ' + euro(rond(heen + terug)) +
-      '\n\nWil je dat overmaken? Dankjewel!\n\nIBAN: NL91 ABNA 0417 1643 00\nThijs';
+      'Hoi Sanne,\nDit zijn je ritten:\n\n• 10 okt · Heen: ' + euro(heen) +
+      '\n• 12 okt · Terug: ' + euro(terug) + '\n\nTotaal: ' + euro(rond(heen + terug)) +
+      '\n\nMaak je het over? Dank je!\n\nIBAN: NL91 ABNA 0417 1643 00 t.n.v. Thijs\n\nUitgerekend met Ritje: ritje-app.nl/v';
     document.getElementById('minder').disabled = personen <= 2;
     document.getElementById('meer').disabled = personen >= 5;
     tik(document.getElementById('personen'));
