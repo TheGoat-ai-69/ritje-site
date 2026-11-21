@@ -19,7 +19,6 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
-<script>document.documentElement.className += " js";</script>
 <style>
 /* Lettertypen uit de huisstijl, van onze eigen server (public/fonts). Er wordt niets bij Google of een ander opgehaald. */
 @font-face { font-family: "Bricolage Grotesque"; font-weight: 600 800; font-display: swap; src: url(fonts/bricolage.woff2) format("woff2"); }
@@ -33,16 +32,18 @@
    komt terug in de slogan: de twee regels staan net als het logo een stukje verschoven.
    Witruimte op een raster van 8 px; letters op een vaste schaal van 7 maten. */
 :root {
-  /* Kleuren: inkt is het inktblauw uit het logo, merk de blauwe merkkleur uit docs/huisstijl.md (20 november 2026). */
+  /* Kleuren: dezelfde als in de app (src/constants/theme.ts, het luchtige ontwerp van 20 november 2026).
+     Inkt is het inktblauw van het logo, blauw de merkkleur. Blauw zuinig: knoppen, de balk van de rit, links. */
   --grond: #FFFFFF;
-  --vlak: #F2F3F5;
+  --vlak: #F4F6F9;
   --kaart: #FFFFFF;
   --inkt: #0E1838;
-  --inkt-zacht: #535B6B;
-  --lijn: rgba(14, 24, 56, .10);
+  --inkt-zacht: #5B6375;
+  --lijn: #E5E8ED;
   --merk: #2459E0;
-  --merk-diep: #1D4BC2;
+  --merk-diep: #1A48BC;
   --merk-tekst: #2459E0;
+  --merk-vlak: #E9F0FF;
   --op-merk: #FFFFFF;
   --nacht: #0E1838;
   --nacht-rand: transparent;
@@ -54,8 +55,9 @@
   --wa-tekst: #111B21;
   --wa-tijd: #667781;
   --wa-vinkje: #53BDEB;
-  --schaduw: 0 1px 2px rgba(14, 24, 56, .06), 0 2px 6px -2px rgba(14, 24, 56, .06), 0 24px 48px -24px rgba(14, 24, 56, .28);
-  --schaduw-klein: 0 1px 2px rgba(14, 24, 56, .08), 0 10px 24px -12px rgba(14, 24, 56, .30);
+  /* Geen schaduwen meer (luchtig): kaarten krijgen een dun lijntje. */
+  --schaduw: 0 0 0 1px var(--lijn);
+  --schaduw-klein: 0 0 0 1px var(--lijn);
 
   /* Letters */
   --font-kop: "Bricolage Grotesque", "Arial Black", system-ui, sans-serif;
@@ -70,6 +72,7 @@
   /* Witruimte: alles is een veelvoud van 8 px */
   --r1: .5rem; --r2: 1rem; --r3: 1.5rem; --r4: 2rem; --r6: 3rem; --r8: 4rem;
   --blok: clamp(4.5rem, 3rem + 6vw, 7.5rem);
+  --rand: 24px; /* ruimte links en rechts van de pagina; de bovenbalk en de grijze band lopen tot de rand door */
 
   /* Beweging: één uitloop, drie snelheden */
   --uit: cubic-bezier(.23, 1, .32, 1);
@@ -79,20 +82,20 @@
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --grond: #000000; --vlak: #16181C; --kaart: #0C0D10; --inkt: #F2F4F8; --inkt-zacht: #A3A9B6;
-    --lijn: rgba(242, 244, 248, .10); --merk-tekst: #7FA4FF; --nacht: #0C0D10; --nacht-rand: rgba(242, 244, 248, .08);
+    --grond: #000000; --vlak: #14161A; --kaart: #0C0D10; --inkt: #F2F4F8; --inkt-zacht: #A3A9B6;
+    --lijn: #202328; --merk-tekst: #7FA4FF; --merk-vlak: #13203E; --nacht: #101A2E; --nacht-rand: rgba(242, 244, 248, .08);
     --wa-grond: #0B141A; --wa-bel: #005C4B; --wa-tekst: #E9EDEF; --wa-tijd: #A7C4BE;
-    --schaduw: 0 1px 0 rgba(255, 255, 255, .04) inset, 0 24px 48px -24px rgba(0, 0, 0, .7);
-    --schaduw-klein: 0 1px 0 rgba(255, 255, 255, .04) inset, 0 12px 28px -12px rgba(0, 0, 0, .8);
+    --schaduw: 0 0 0 1px var(--lijn);
+    --schaduw-klein: 0 0 0 1px var(--lijn);
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --grond: #000000; --vlak: #16181C; --kaart: #0C0D10; --inkt: #F2F4F8; --inkt-zacht: #A3A9B6;
-  --lijn: rgba(242, 244, 248, .10); --merk-tekst: #7FA4FF; --nacht: #0C0D10; --nacht-rand: rgba(242, 244, 248, .08);
+  --grond: #000000; --vlak: #14161A; --kaart: #0C0D10; --inkt: #F2F4F8; --inkt-zacht: #A3A9B6;
+  --lijn: #202328; --merk-tekst: #7FA4FF; --merk-vlak: #13203E; --nacht: #101A2E; --nacht-rand: rgba(242, 244, 248, .08);
   --wa-grond: #0B141A; --wa-bel: #005C4B; --wa-tekst: #E9EDEF; --wa-tijd: #A7C4BE;
-  --schaduw: 0 1px 0 rgba(255, 255, 255, .04) inset, 0 24px 48px -24px rgba(0, 0, 0, .7);
-  --schaduw-klein: 0 1px 0 rgba(255, 255, 255, .04) inset, 0 12px 28px -12px rgba(0, 0, 0, .8);
+  --schaduw: 0 0 0 1px var(--lijn);
+  --schaduw-klein: 0 0 0 1px var(--lijn);
   color-scheme: dark;
 }
 
@@ -102,7 +105,7 @@ body {
   background: var(--grond); color: var(--inkt);
   font-family: var(--font-tekst); font-size: var(--t-tekst); line-height: 1.55;
   -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
-  padding-inline: 16px;
+  margin: 0; padding-inline: var(--rand);
 }
 .kolom { max-width: 70rem; margin-inline: auto; }
 h1, h2, h3 { font-family: var(--font-kop); margin: 0; text-wrap: balance; }
@@ -122,10 +125,9 @@ p { margin: 0; text-wrap: pretty; }
 /* Knoppen: één vorm, twee kleuren. Indrukken voelt als een echte knop. */
 .knop {
   display: inline-flex; align-items: center; justify-content: center; gap: .55rem; min-height: 48px;
-  padding: .875rem 1.5rem; border: 0; border-radius: 999px; cursor: pointer; text-decoration: none;
+  padding: .875rem 1.5rem; border: 0; border-radius: 10px; cursor: pointer; text-decoration: none;
   font: 700 1rem/1 var(--font-tekst); letter-spacing: .005em;
   background: var(--merk); color: var(--op-merk);
-  box-shadow: 0 6px 16px -8px rgba(14, 24, 56, .35);
   transition: background-color var(--snel) ease, transform var(--snel) var(--uit);
   -webkit-tap-highlight-color: transparent;
 }
@@ -134,11 +136,10 @@ p { margin: 0; text-wrap: pretty; }
 @media (hover: hover) and (pointer: fine) { .knop:hover { background: var(--merk-diep); } }
 .knop.klein { min-height: 40px; padding: .625rem 1.125rem; font-size: .9375rem; }
 
-/* Bovenbalk: blijft staan, met een randje zodra je scrolt */
+/* Bovenbalk: blijft staan, effen achtergrond, met een dun lijntje zodra je scrolt */
 .balk-wrap {
-  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; margin-inline: -16px; padding-inline: 16px;
-  background: color-mix(in srgb, var(--grond) 82%, transparent);
-  -webkit-backdrop-filter: saturate(1.6) blur(14px); backdrop-filter: saturate(1.6) blur(14px);
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; margin-inline: calc(-1 * var(--rand)); padding-inline: var(--rand);
+  background: var(--grond);
   box-shadow: 0 1px 0 transparent; transition: box-shadow var(--normaal) ease;
 }
 .balk-wrap.gescrold { box-shadow: 0 1px 0 var(--lijn); }
@@ -152,17 +153,14 @@ p { margin: 0; text-wrap: pretty; }
 .held-tekst { display: grid; gap: var(--r3); min-width: 0; justify-items: start; }
 .slogan { font-size: var(--t-h1); line-height: .94; font-weight: 800; letter-spacing: -.035em; display: grid; }
 .slogan span { display: block; }
-.slogan .boven { color: var(--merk-tekst); }
 .slogan .onder { padding-left: .55em; }
 .inleiding { font-size: var(--t-groot); line-height: 1.45; color: var(--inkt-zacht); max-width: 30rem; }
-.feiten { display: flex; flex-wrap: wrap; gap: var(--r1) var(--r3); padding: 0; margin: 0; list-style: none; font-size: .9375rem; color: var(--inkt-zacht); }
-.feiten li { display: inline-flex; align-items: center; gap: .4rem; }
-.feiten svg { width: 1rem; height: 1rem; color: var(--merk-tekst); flex: none; }
+.feiten { font-size: .9375rem; color: var(--inkt-zacht); }
 
 /* De voorbeeldrit */
 .voorbeeld { position: relative; width: 100%; max-width: 25.5rem; justify-self: center; padding-bottom: var(--r2); }
 #voorbeeld { scroll-margin-top: 5.5rem; } /* de knop "Reken een rit uit" springt hierheen; ruimte voor de vaste balk bovenaan */
-.rit { background: var(--kaart); border-radius: 28px; box-shadow: var(--schaduw); overflow: hidden; }
+.rit { background: var(--kaart); border-radius: 16px; box-shadow: var(--schaduw); overflow: hidden; }
 .rit-binnen { padding: var(--r3); display: grid; gap: var(--r3); }
 .rit-kop { display: flex; justify-content: space-between; align-items: center; gap: var(--r2); }
 .label { font-size: var(--t-klein); color: var(--inkt-zacht); }
@@ -187,7 +185,7 @@ p { margin: 0; text-wrap: pretty; }
 .suggesties { list-style: none; margin: calc(-1 * var(--r2)) 0 0; padding: 0; display: grid; gap: 2px; }
 .suggesties[hidden] { display: none; } /* anders neemt de lege lijst toch ruimte in het kaartje */
 .suggesties li { display: flex; justify-content: space-between; align-items: baseline; gap: .5rem; padding: .5rem .625rem; border-radius: 10px; background: var(--vlak); font-size: .9375rem; cursor: pointer; }
-.suggesties li:hover, .suggesties li[aria-selected="true"] { background: #E4E7EC; }
+.suggesties li:hover, .suggesties li[aria-selected="true"] { background: var(--merk-vlak); }
 .suggesties small { flex: none; color: var(--inkt-zacht); font-size: var(--t-klein); }
 .rekenstand { margin: calc(-1 * var(--r2)) 0 0; font-size: var(--t-klein); color: var(--inkt-zacht); }
 .rekenstand:empty { display: none; }
@@ -221,7 +219,7 @@ p { margin: 0; text-wrap: pretty; }
 /* Het bericht dat de meerijder krijgt */
 .verstuurd {
   position: relative; width: min(19.5rem, 88%); margin: var(--r2) 0 0 auto;
-  background: var(--wa-grond); border-radius: 20px; padding: .625rem .625rem .75rem; box-shadow: var(--schaduw-klein);
+  background: var(--wa-grond); border-radius: 16px; padding: .625rem .625rem .75rem; box-shadow: var(--schaduw-klein);
 }
 .verstuurd .naar { display: flex; align-items: center; gap: .4rem; padding: .125rem .375rem .5rem; font-size: var(--t-klein); color: var(--wa-tijd); }
 .verstuurd .naar svg { width: .875rem; height: .875rem; color: #25D366; }
@@ -241,25 +239,21 @@ p { margin: 0; text-wrap: pretty; }
 @media (min-width: 56rem) { .twee { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--r8); } }
 .lijst { display: grid; gap: var(--r2); padding: 0; margin: 0; list-style: none; max-width: 32rem; }
 .lijst li { display: grid; grid-template-columns: 1.5rem 1fr; gap: .625rem; color: var(--inkt-zacht); }
-.lijst svg { width: 1.25rem; height: 1.25rem; margin-top: .15rem; color: var(--merk-tekst); }
-.groep { background: var(--vlak); border-radius: 28px; padding: var(--r3); display: grid; gap: .625rem; max-width: 28rem; width: 100%; justify-self: center; }
+.lijst svg { width: 1.25rem; height: 1.25rem; margin-top: .15rem; color: var(--inkt); }
+.groep { background: var(--vlak); border-radius: 16px; padding: var(--r3); display: grid; gap: .625rem; max-width: 28rem; width: 100%; justify-self: center; }
 .groep-naam { display: flex; align-items: center; gap: .625rem; padding-bottom: var(--r1); border-bottom: 1px solid var(--lijn); margin-bottom: .25rem; font-weight: 700; font-size: .9375rem; }
 .groep-naam .rondje { width: 2rem; height: 2rem; border-radius: 50%; display: grid; place-items: center; background: var(--kaart); font-size: 1rem; }
 .groep-naam small { display: block; font-weight: 400; color: var(--inkt-zacht); font-size: var(--t-klein); }
-.bel { margin: 0; padding: .625rem .875rem; border-radius: 18px; max-width: 85%; line-height: 1.4; font-size: .9375rem; background: var(--kaart); box-shadow: 0 1px 1px rgba(14, 24, 56, .06); }
+.bel { margin: 0; padding: .625rem .875rem; border-radius: 18px; max-width: 85%; line-height: 1.4; font-size: .9375rem; background: var(--kaart); }
 .bel .wie { display: block; font-size: .75rem; font-weight: 700; color: var(--merk-tekst); }
 .bel.ander { border-bottom-left-radius: 6px; }
 .bel.ik { justify-self: end; background: var(--merk); color: var(--op-merk); border-bottom-right-radius: 6px; }
 
-/* 3. Zo werkt het: de enige band met een kleur, zodat de pagina ademt */
-.band { background: var(--vlak); margin-inline: -16px; padding-inline: 16px; }
-.stappen { display: grid; gap: var(--r6); padding: 0; margin: 0; list-style: none; counter-reset: stap; }
+/* 3. Zo werkt het: de enige band met een kleur, van rand tot rand, zodat de pagina ademt */
+.band { background: var(--vlak); margin-inline: calc(-1 * var(--rand)); padding-inline: var(--rand); }
+.stappen { display: grid; gap: var(--r6); padding: 0; margin: 0; list-style: none; }
 @media (min-width: 56rem) { .stappen { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--r4); } }
-.stappen li { display: grid; gap: var(--r1); align-content: start; counter-increment: stap; max-width: 24rem; }
-.stappen li::before {
-  content: counter(stap); font: 800 1.125rem/1 var(--font-kop); width: 2.5rem; height: 2.5rem; border-radius: 50%;
-  display: grid; place-items: center; background: var(--merk); color: var(--op-merk); margin-bottom: var(--r1);
-}
+.stappen li { display: grid; gap: var(--r1); align-content: start; max-width: 24rem; padding-top: var(--r3); border-top: 1px solid var(--lijn); }
 .stappen p { color: var(--inkt-zacht); }
 .stappen-wrap { align-items: center; }
 @media (min-width: 56rem) {
@@ -274,13 +268,6 @@ p { margin: 0; text-wrap: pretty; }
 }
 .telefoon .scherm { border-radius: 2.25rem; overflow: hidden; background: #FFFFFF; aspect-ratio: 9 / 20; }
 .telefoon video { display: block; width: 100%; height: 100%; object-fit: cover; }
-
-/* 4. Waarom Ritje */
-.voordelen { display: grid; gap: var(--r6); }
-@media (min-width: 56rem) { .voordelen { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--r4); } }
-.voordeel { display: grid; gap: var(--r1); align-content: start; padding-top: var(--r3); border-top: 2px solid var(--inkt); max-width: 24rem; }
-.voordeel .bron { font: 500 var(--t-klein)/1.2 var(--font-cijfer); color: var(--merk-tekst); }
-.voordeel p { color: var(--inkt-zacht); }
 
 /* 5. Reviews: zelfde vorm als straks met echte reviews, nu nog leeg */
 .reviews { display: grid; gap: var(--r2); }
@@ -306,16 +293,16 @@ details p { color: var(--inkt-zacht); max-width: 38rem; padding-bottom: 1.25rem;
 @media (hover: hover) and (pointer: fine) { summary:hover .plus { background: color-mix(in srgb, var(--merk-tekst) 16%, var(--vlak)); } }
 
 /* 7. Binnenkort: het donkere slot van de pagina, in beide standen */
-.slot { background: var(--nacht); color: #F2F4F8; border-radius: 32px; box-shadow: 0 0 0 1px var(--nacht-rand) inset; padding: clamp(2rem, 1rem + 5vw, 4.5rem); display: grid; gap: var(--r6); overflow: hidden; position: relative; }
+.slot { background: var(--nacht); color: #F2F4F8; border-radius: 16px; box-shadow: 0 0 0 1px var(--nacht-rand) inset; padding: clamp(2rem, 1rem + 5vw, 4.5rem); display: grid; gap: var(--r6); overflow: hidden; position: relative; }
 .slot h2 { color: #FFFFFF; max-width: 18ch; }
-.slot .zacht { color: #B9C0CE; }
+.slot .zacht { color: #B6BDCB; }
 .slot :focus-visible { outline-color: #FFFFFF; }
 .slot-r { position: absolute; right: clamp(1.5rem, 1rem + 2vw, 3rem); bottom: clamp(1.5rem, 1rem + 2vw, 3rem); width: 6.5rem; height: auto; opacity: .85; pointer-events: none; }
 @media (max-width: 40rem) { .slot-r { width: 3.5rem; } }
 /* Op de telefoon staat alles onder elkaar; dan is minder ruimte tussen de blokken en de kopjes prettiger. */
 @media (max-width: 40rem) {
   :root { --blok: 3.5rem; }
-  .blok > .kolom, .stappen-wrap, .voordelen, .stappen { gap: var(--r4); }
+  .blok > .kolom, .stappen-wrap, .stappen { gap: var(--r4); }
   .held { gap: var(--r4); }
 }
 .slot-boven, .slot-onder { display: grid; gap: var(--r3); position: relative; }
@@ -330,32 +317,27 @@ details p { color: var(--inkt-zacht); max-width: 38rem; padding-bottom: 1.25rem;
 .winkel small { font-size: .625rem; letter-spacing: .02em; }
 .winkel strong { font-size: 1.1875rem; font-weight: 600; letter-spacing: -.01em; }
 .winkel.play small { text-transform: uppercase; font-size: .5625rem; letter-spacing: .06em; }
-.binnenkort { font-size: var(--t-klein); color: #B9C0CE; }
+.binnenkort { font-size: var(--t-klein); color: #B6BDCB; }
 .seintje { display: grid; gap: var(--r2); justify-items: start; padding-top: var(--r2); }
 .seintje .zacht { font-size: var(--t-klein); max-width: 30rem; }
 .delen { display: flex; flex-wrap: wrap; gap: .75rem; }
-.slot .knop.wit { background: #FFFFFF; color: var(--nacht); box-shadow: 0 6px 16px -8px rgba(0, 0, 0, .6); }
-@media (hover: hover) and (pointer: fine) { .slot .knop.wit:hover { background: #E5EBFB; } }
+.slot .knop.wit { background: #FFFFFF; color: var(--nacht); }
+@media (hover: hover) and (pointer: fine) { .slot .knop.wit:hover { background: #E9F0FF; } }
 .slot .knop.rand { background: transparent; color: #FFFFFF; box-shadow: inset 0 0 0 1.5px rgba(242, 244, 248, .35); }
 @media (hover: hover) and (pointer: fine) { .slot .knop.rand:hover { background: rgba(242, 244, 248, .08); } }
-.gekopieerd { font-size: var(--t-klein); color: #B9C0CE; min-height: 1.25rem; }
+.gekopieerd { font-size: var(--t-klein); color: #B6BDCB; min-height: 1.25rem; }
 
 footer { padding-block: var(--r6) var(--r8); color: var(--inkt-zacht); font-size: .9375rem; }
 footer .kolom { display: flex; flex-wrap: wrap; gap: var(--r1) var(--r4); justify-content: space-between; }
 footer a { color: inherit; text-underline-offset: 3px; }
 
 /* Beweging. Eén moment bij het openen: de slogan schuift uit elkaar zoals de twee helften van het logo,
-   de rit komt omhoog en daarna komt het bericht binnen. Verder beweegt alleen wat je zelf aanraakt.
+   en daarna komt het bericht binnen. Al het andere staat er meteen; verder beweegt alleen wat je zelf aanraakt.
    Wie op de telefoon "minder beweging" aan heeft staan, ziet alles meteen stil staan. */
 @media (prefers-reduced-motion: no-preference) {
   html { scroll-behavior: smooth; }
   .slogan .boven { animation: naar-links var(--rustig) 120ms var(--uit) both; }
   .slogan .onder { animation: naar-rechts var(--rustig) 120ms var(--uit) both; }
-  .held-tekst > :not(.slogan) { animation: op 600ms var(--uit) both; }
-  .held-tekst > :nth-child(2) { animation-delay: 220ms; }
-  .held-tekst > :nth-child(3) { animation-delay: 280ms; }
-  .held-tekst > :nth-child(4) { animation-delay: 340ms; }
-  .rit { animation: op var(--rustig) 200ms var(--uit) both; }
   /* Het kaartje komt binnen, Sanne ziet eerst "typt…" en dan pas het bericht. */
   .verstuurd { animation: binnen 520ms 700ms var(--uit) both; }
   .verstuurd .wa.bericht { animation: binnen 420ms 2100ms var(--uit) both; }
@@ -365,12 +347,8 @@ footer a { color: inherit; text-underline-offset: 3px; }
   .typt span:nth-child(3) { animation-delay: .4s; }
   @keyframes weg { to { visibility: hidden; opacity: 0; } }
   @keyframes stip { 0%, 60%, 100% { transform: translateY(0); opacity: .45; } 30% { transform: translateY(-3px); opacity: 1; } }
-  /* Verderop op de pagina komt elk blok zacht omhoog zodra je ernaartoe scrolt (alleen met JavaScript; anders staat alles er gewoon). */
-  .js .onthul { opacity: 0; transform: translateY(14px); transition: opacity 640ms var(--uit), transform 640ms var(--uit); }
-  .js .onthul.zichtbaar { opacity: 1; transform: none; }
   @keyframes naar-links { from { transform: translateX(.18em); } }
   @keyframes naar-rechts { from { transform: translateX(-.18em); } }
-  @keyframes op { from { opacity: 0; transform: translateY(12px); } }
   @keyframes binnen { from { opacity: 0; transform: translateY(10px) scale(.97); } }
   .tik { animation: tik var(--normaal) var(--uit); }
   @keyframes tik { from { opacity: .3; transform: translateY(-4px); } }
@@ -405,11 +383,7 @@ footer a { color: inherit; text-underline-offset: 3px; }
       <h1 class="slogan"><span class="boven">Jij rijdt,</span><span class="onder">Ritje rekent.</span></h1>
       <p class="inleiding">Ritje rekent uit wat je autorit kost en zet één betaalverzoek voor je meerijders klaar voor WhatsApp.</p>
       <a class="knop" href="#voorbeeld">Reken een rit uit</a>
-      <ul class="feiten" aria-label="In het kort">
-        <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Gratis</li>
-        <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>iPhone en Android</li>
-        <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Zonder account</li>
-      </ul>
+      <p class="feiten">Gratis, voor iPhone en Android.</p>
     </div>
 
     <div class="voorbeeld" id="voorbeeld">
@@ -450,12 +424,11 @@ footer a { color: inherit; text-underline-offset: 3px; }
         <div class="totaal"><span>Per persoon</span><span class="bedrag" id="per-persoon">€ 9,19</span></div>
       </section>
 
-      <!-- Zelfde opbouw als maakBetaalverzoek() in src/lib/bericht.ts: heen met parkeren, terug zonder. -->
+      <!-- Precies de tekst die maakBetaalverzoek() in src/lib/bericht.ts maakt (standaard aanhef en afsluiting, met IBAN): heen met parkeren, terug zonder. -->
       <div class="verstuurd" aria-label="Voorbeeld van het WhatsApp-bericht dat je meerijder krijgt">
         <span class="naar"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>Naar Sanne</span>
         <p class="typt" aria-hidden="true"><span></span><span></span><span></span></p>
-        <p class="wa bericht"><span id="bericht">Hoi Sanne,
-Dit zijn je ritten:
+        <p class="wa bericht"><span id="bericht">Hoi Sanne, dit zijn je ritten:
 
 • 10 okt · Heen: € 9,19
 • 12 okt · Terug: € 8,19
@@ -464,7 +437,8 @@ Totaal: € 17,38
 
 Maak je het over? Dank je!
 
-IBAN: NL91 ABNA 0417 1643 00 t.n.v. Thijs
+IBAN: NL91 ABNA 0417 1643 00
+t.n.v. Thijs
 
 Uitgerekend met Ritje: ritje-app.nl/v</span><span class="tijd">18:42 <svg viewBox="0 0 16 11" aria-label="Gelezen"><path d="M1 6l3 3 6-7M6 9l1 1 7-8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></p>
       </div>
@@ -475,8 +449,7 @@ Uitgerekend met Ritje: ritje-app.nl/v</span><span class="tijd">18:42 <svg viewBo
   <section class="blok" aria-labelledby="kop-herken">
     <div class="kolom twee">
       <div class="kop">
-        <h2 id="kop-herken">Samen rijden is leuk. Achteraf om geld vragen niet.</h2>
-        <p class="zacht">Na een paar weekenden weet niemand meer wie wat heeft betaald, en vragen doe je liever niet.</p>
+        <h2 id="kop-herken">Na een paar weekenden weet niemand meer wie wat betaald heeft.</h2>
       </div>
       <div class="groep" aria-label="Voorbeeld van een groepsapp">
         <div class="groep-naam"><span class="rondje" aria-hidden="true">🚗</span><span>Weekend Amsterdam<small>Daan, Sanne, Noor, jij</small></span></div>
@@ -487,7 +460,7 @@ Uitgerekend met Ritje: ritje-app.nl/v</span><span class="tijd">18:42 <svg viewBo
     </div>
   </section>
 
-  <!-- 3. Is het makkelijk? Echte volgorde, dus genummerd. -->
+  <!-- 3. Is het makkelijk? De stappen staan op volgorde, met een dun lijntje erboven (geen cijfers in rondjes). -->
   <section class="blok band" aria-labelledby="kop-stappen">
     <div class="kolom stappen-wrap">
       <!-- Echte opname van de app (Android-emulator, scripts in de werkmap), geen nagebouwd plaatje.
@@ -495,30 +468,17 @@ Uitgerekend met Ritje: ritje-app.nl/v</span><span class="tijd">18:42 <svg viewBo
       <figure class="telefoon" aria-label="Opname van de app: een rit invullen, het bedrag per persoon zien en een betaalverzoek sturen">
         <div class="scherm">
           <video id="demo" muted loop playsinline preload="metadata" poster="video/app-demo-poster.jpg" width="540" height="1200">
-            <source src="video/app-demo.webm" type="video/webm">
             <source src="video/app-demo.mp4" type="video/mp4">
           </video>
         </div>
       </figure>
       <div class="stappen-tekst">
-      <div class="kop"><h2 id="kop-stappen">In drie stappen geregeld</h2></div>
+      <div class="kop"><h2 id="kop-stappen">Zo gaat het</h2></div>
       <ol class="stappen">
-        <li><h3>Zeg waar je heen rijdt</h3><p>De afstand rekent Ritje zelf uit. Je kenteken vul je één keer in: Ritje zoekt het verbruik van jouw auto op bij de RDW en onthoudt het.</p></li>
+        <li><h3>Zeg waar je heen rijdt</h3><p>De afstand rekent Ritje zelf uit. Je kenteken vul je één keer in: Ritje zoekt het verbruik van jouw auto op bij de RDW en neemt de gemiddelde pompprijs van het CBS.</p></li>
         <li><h3>Zie wat ieder betaalt</h3><p>Brandstof, tol en parkeren, gedeeld door iedereen in de auto. Jij betaalt ook mee.</p></li>
         <li><h3>Spaar op en vraag in één keer</h3><p>Elke rit komt op de rekening van je meerijder. Na een week of een maand stuur je één bericht voor alle ritten samen.</p></li>
       </ol>
-      </div>
-    </div>
-  </section>
-
-  <!-- 4. Wat heb ik eraan? -->
-  <section class="blok" aria-labelledby="kop-waarom">
-    <div class="kolom">
-      <div class="kop"><h2 id="kop-waarom">Eerlijk delen</h2></div>
-      <div class="voordelen">
-        <div class="voordeel"><h3>Een eerlijk bedrag</h3><p>Ritje rekent met het verbruik van jouw auto bij de RDW en de gemiddelde pompprijs van het CBS.</p></div>
-        <div class="voordeel"><h3>Ritje houdt het bij</h3><p>Elke rit komt op de rekening van je meerijder. Je ziet wie nog wat moet betalen.</p></div>
-        <div class="voordeel"><h3>Zonder account</h3><p>Downloaden en beginnen. Je ritten, meerijders en IBAN blijven op je telefoon.</p></div>
       </div>
     </div>
   </section>
@@ -540,16 +500,16 @@ Uitgerekend met Ritje: ritje-app.nl/v</span><span class="tijd">18:42 <svg viewBo
   </section>
 
   <!-- 6. Vragen -->
-  <section class="blok" aria-labelledby="kop-twijfels" style="padding-top: 0">
+  <section class="blok" aria-labelledby="kop-twijfels">
     <div class="kolom">
       <div class="kop"><h2 id="kop-twijfels">Vragen</h2></div>
       <div class="vragen">
         <details><summary>Kost het geld?<span class="plus" aria-hidden="true"></span></summary><p>Ritje is gratis. Kosten uitrekenen, ritten opsparen en betaalverzoeken sturen kost je niets, en er staat geen reclame in.</p></details>
         <details><summary>Moeten mijn meerijders de app hebben?<span class="plus" aria-hidden="true"></span></summary><p>Nee. Zij krijgen gewoon een bericht via WhatsApp of Berichten, met het bedrag en je IBAN.</p></details>
-        <details><summary>Klopt het bedrag precies?<span class="plus" aria-hidden="true"></span></summary><p>Het is een schatting op basis van het officiële verbruik van je auto, met een correctie voor echt rijden, en de gemiddelde pompprijs van het CBS. De prijs kun je zelf aanpassen.</p></details>
+        <details><summary>Klopt het bedrag precies?<span class="plus" aria-hidden="true"></span></summary><p>Het is een schatting. Ritje rekent met het officiële verbruik van je auto, met een correctie voor echt rijden. Bij benzine, diesel en LPG neemt hij de gemiddelde pompprijs van het CBS, bij een elektrische auto wat laden gemiddeld kost: thuis, bij een laadpaal of bij een snellader. De prijs kun je altijd zelf aanpassen.</p></details>
         <details><summary>Verdien ik hieraan?<span class="plus" aria-hidden="true"></span></summary><p>Nee. Ritje deelt alleen wat de rit echt kost. Iedereen betaalt zijn deel, de bestuurder ook. Zo blijft het samen rijden en geen taxi.</p></details>
         <details><summary>Wat gebeurt er met mijn gegevens?<span class="plus" aria-hidden="true"></span></summary><p>Je ritten, meerijders en IBAN staan alleen op je eigen telefoon. Voor de afstand en de tol gaan alleen punten van de route naar onze server, zonder je naam, en die bewaren we niet. De app telt anoniem hoe vaak hij gebruikt wordt, zonder naam, adres of route; dat zet je uit bij Instellingen. Deze website gebruikt geen cookies en houdt niet bij wie er kijkt.</p></details>
-        <details><summary>Werkt het met een elektrische auto?<span class="plus" aria-hidden="true"></span></summary><p>Ja. Ritje rekent dan met het stroomverbruik van je auto en wat laden kost, thuis of bij een laadpaal.</p></details>
+        <details><summary>Werkt het met mijn auto?<span class="plus" aria-hidden="true"></span></summary><p>Ja, met auto's op benzine, diesel en LPG, met hybrides en plug-in hybrides en met elektrische auto's. Bij een elektrische auto rekent Ritje met het stroomverbruik en wat laden kost: thuis, bij een laadpaal of bij een snellader. Geen Nederlands kenteken? Dan vul je het verbruik zelf in.</p></details>
       </div>
     </div>
   </section>
@@ -666,62 +626,26 @@ Uitgerekend met Ritje: ritje-app.nl/v</span><span class="tijd">18:42 <svg viewBo
   function euro(n) { return '€ ' + n.toFixed(2).replace('.', ','); }
   function rond(n) { return Math.round(n * 100) / 100; }
   function tik(el) { el.classList.remove('tik'); void el.offsetWidth; el.classList.add('tik'); }
-  var beweging = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // Een bedrag loopt in een halve seconde naar zijn nieuwe waarde, in plaats van te springen. Zo zie je
-  // dat er gerekend wordt. Per vakje onthouden we waar het staat en welke telling nog loopt.
-  var stand = {}, loop = {};
-  function telNaar(el, naar) {
-    if (!beweging) { stand[el.id] = naar; el.textContent = euro(naar); return; }
-    var van = stand[el.id] == null ? naar : stand[el.id];
-    if (loop[el.id]) cancelAnimationFrame(loop[el.id]);
-    var begin = performance.now(), duur = 520;
-    function stap(nu) {
-      var t = Math.min((nu - begin) / duur, 1);
-      var zacht = 1 - Math.pow(1 - t, 3); // snel op gang, rustig uit
-      var waarde = van + (naar - van) * zacht;
-      el.textContent = euro(t < 1 ? waarde : naar);
-      if (t < 1) loop[el.id] = requestAnimationFrame(stap); else { stand[el.id] = naar; loop[el.id] = null; }
-    }
-    loop[el.id] = requestAnimationFrame(stap);
-  }
   function teken() {
     var brandstof = rond(getal(veld.km, 5000) * VERBRUIK / 100 * getal(veld.prijs, 10));
     var parkeren = getal(veld.parkeren, 500);
     var heen = rond((brandstof + parkeren) / personen);
     var terug = rond(brandstof / personen);
-    telNaar(document.getElementById('brandstof'), brandstof);
+    // Bedragen staan er meteen, zonder op te tellen.
+    document.getElementById('brandstof').textContent = euro(brandstof);
     document.getElementById('personen').textContent = personen;
-    telNaar(document.getElementById('per-persoon'), heen);
+    document.getElementById('per-persoon').textContent = euro(heen);
     document.getElementById('bericht').textContent =
-      'Hoi Sanne,\nDit zijn je ritten:\n\n• 10 okt · Heen: ' + euro(heen) +
+      'Hoi Sanne, dit zijn je ritten:\n\n• 10 okt · Heen: ' + euro(heen) +
       '\n• 12 okt · Terug: ' + euro(terug) + '\n\nTotaal: ' + euro(rond(heen + terug)) +
-      '\n\nMaak je het over? Dank je!\n\nIBAN: NL91 ABNA 0417 1643 00 t.n.v. Thijs\n\nUitgerekend met Ritje: ritje-app.nl/v';
+      '\n\nMaak je het over? Dank je!\n\nIBAN: NL91 ABNA 0417 1643 00\nt.n.v. Thijs\n\nUitgerekend met Ritje: ritje-app.nl/v';
     document.getElementById('minder').disabled = personen <= 2;
     document.getElementById('meer').disabled = personen >= 5;
-    tik(document.getElementById('personen'));
   }
-  // Bij het openen tellen de bedragen vanaf nul op, net als het kaartje zelf in beeld komt.
-  if (beweging) { stand['per-persoon'] = 0; stand.brandstof = 0; setTimeout(teken, 420); }
+  teken();
 
-  // Blokken verderop komen zacht omhoog zodra je ernaartoe scrolt; elk volgend blokje iets later dan het vorige.
-  if (beweging && 'IntersectionObserver' in window) {
-    var onthul = document.querySelectorAll('.blok .kop, .kop + .lijst li, .groep, .telefoon, .stappen > li, .voordeel, .review, .vragen details, #probeer .kop, #probeer .delen');
-    var kijker = new IntersectionObserver(function (items) {
-      items.forEach(function (item) {
-        if (!item.isIntersecting) return;
-        item.target.classList.add('zichtbaar');
-        kijker.unobserve(item.target);
-      });
-    }, { rootMargin: '0px 0px -8% 0px' });
-    Array.prototype.forEach.call(onthul, function (el) {
-      var plek = Array.prototype.indexOf.call(el.parentNode.children, el);
-      el.style.transitionDelay = Math.min(plek, 5) * 70 + 'ms';
-      el.classList.add('onthul');
-      kijker.observe(el);
-    });
-  }
-  document.getElementById('minder').addEventListener('click', function () { if (personen > 2) { personen--; teken(); } });
+  document.getElementById('minder').addEventListener('click', function () { if (personen > 2) { personen--; teken(); tik(document.getElementById('personen')); } });
   // Andere vertrekplaats: de afstand vult zich vanzelf in. Typen in een vakje rekent meteen opnieuw.
 
   // De rekenproef. Adressen zoeken gaat via onze eigen server (/adressen), met precies hetzelfde zoekstuk
@@ -825,7 +749,7 @@ Uitgerekend met Ritje: ritje-app.nl/v</span><span class="tijd">18:42 <svg viewBo
   veld.prijs.addEventListener('blur', function () { this.value = netjes(getal(this, 10)); pas(this); });
   veld.parkeren.addEventListener('blur', function () { this.value = netjes(getal(this, 500)); pas(this); });
   veld.km.addEventListener('blur', function () { this.value = Math.round(getal(this, 5000)); pas(this); });
-  document.getElementById('meer').addEventListener('click', function () { if (personen < 5) { personen++; teken(); } });
+  document.getElementById('meer').addEventListener('click', function () { if (personen < 5) { personen++; teken(); tik(document.getElementById('personen')); } });
 
   // Link kopiëren; lukt het niet, dan staat de link er gewoon om zelf te kopiëren.
   var melding = document.getElementById('kopieer-melding');
